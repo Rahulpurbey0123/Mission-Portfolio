@@ -10,19 +10,24 @@ document.addEventListener('DOMContentLoaded', function () {
      ------------------------------------------------------------------------ */
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    window.addEventListener('load', function () {
+    const hidePreloader = () => {
+      preloader.style.opacity = '0';
       setTimeout(() => {
-        preloader.style.opacity = '0';
         preloader.style.visibility = 'hidden';
-      }, 500);
-    });
-    // Fallback hide after 2.5s
-    setTimeout(() => {
-      if (preloader.style.visibility !== 'hidden') {
-        preloader.style.opacity = '0';
-        preloader.style.visibility = 'hidden';
-      }
-    }, 2500);
+        preloader.style.display = 'none';
+      }, 300);
+    };
+
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', function () {
+        setTimeout(hidePreloader, 300);
+      });
+    }
+
+    // Maximum fallback hide after 1.5s
+    setTimeout(hidePreloader, 1500);
   }
 
   /* ------------------------------------------------------------------------
