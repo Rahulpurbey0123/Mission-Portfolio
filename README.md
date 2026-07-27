@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Rahul Kumar Purbey — Personal Portfolio Website
 
 An ultra-modern, production-ready, dark-themed personal portfolio website for **Rahul Kumar Purbey**, Computer Science Engineering student at **SRM Institute of Science and Technology**, AI & Machine Learning Enthusiast, and Full Stack Developer.
@@ -83,7 +82,3 @@ Mission-Portfolio/
 ---
 
 &copy; 2026 Rahul Kumar Purbey. Built with precision and passion.
-=======
-# Mission-Porfolio
-There exist nothing known as perfect portfolio
->>>>>>> 02cf806b3a9ec3e5c92ca23a09f40b99e4a48edd

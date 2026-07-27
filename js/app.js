@@ -138,8 +138,9 @@ document.addEventListener('DOMContentLoaded', function () {
       statNumbers.forEach(stat => {
         const target = parseFloat(stat.getAttribute('data-target'));
         const suffix = stat.getAttribute('data-suffix') || '';
-        let count = 0;
-        const speed = target / 50;
+        let count = target > 1900 ? target - 30 : 0;
+        const totalSteps = 30;
+        const speed = (target - count) / totalSteps;
 
         const updateCount = () => {
           count += speed;
@@ -158,35 +159,85 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', runStatsAnimation);
 
   /* ------------------------------------------------------------------------
-     6. Contact Form Interactive Submission Handler
+     6. Contact Form Real Email Submission (Web3Forms API + Mailto Fallback)
      ------------------------------------------------------------------------ */
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
 
   if (contactForm && formStatus) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
       const btn = contactForm.querySelector('button[type="submit"]');
       const originalText = btn.innerHTML;
       btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
       btn.disabled = true;
 
-      setTimeout(() => {
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Message Sent!';
+      // Web3Forms Access Key for direct delivery to rahulpurbey83@gmail.com
+      const accessKey = contactForm.getAttribute('data-access-key') || '';
+
+      if (accessKey && accessKey.length > 5 && accessKey !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+        try {
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              access_key: accessKey,
+              name: name,
+              email: email,
+              subject: `[Portfolio] ${subject}`,
+              message: message,
+              from_name: `${name} (via Portfolio)`
+            })
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Message Sent!';
+            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            formStatus.textContent = "Thank you! Your message has been sent directly to Rahul's Gmail inbox (rahulpurbey83@gmail.com).";
+            formStatus.className = "form-status success";
+            contactForm.reset();
+          } else {
+            throw new Error(result.message || 'Submission failed');
+          }
+        } catch (err) {
+          console.warn('API send failed, falling back to mailto:', err);
+          triggerMailtoFallback();
+        }
+      } else {
+        triggerMailtoFallback();
+      }
+
+      function triggerMailtoFallback() {
+        const mailtoSubject = encodeURIComponent(`Portfolio Inquiry: ${subject}`);
+        const mailtoBody = encodeURIComponent(
+          `Hi Rahul,\n\nName: ${name}\nEmail: ${email}\n\nSubject: ${subject}\n\nMessage:\n${message}\n\nBest regards,\n${name}`
+        );
+
+        window.location.href = `mailto:rahulpurbey83@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+        btn.innerHTML = '<i class="fa-solid fa-envelope"></i> Mail App Opened!';
         btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-
-        formStatus.textContent = "Thank you! Your message has been sent successfully. Rahul will get back to you shortly.";
+        formStatus.textContent = "Your mail application opened! Please click 'Send' in your mail app to deliver your message to rahulpurbey83@gmail.com.";
         formStatus.className = "form-status success";
-
         contactForm.reset();
+      }
 
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 4000);
-      }, 1500);
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 6000);
     });
   }
 

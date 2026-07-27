@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!targetEl) return;
 
   const roles = [
-    "Computer Science Student",
-    "AI & Machine Learning Enthusiast",
+    "Computer Science Engineer",
+    "Aspiring AI / ML Engineer",
     "Data Science Enthusiast",
-    "Full Stack Developer"
+    "Software Developer"
   ];
 
   // If external Typed.js library is present, use it

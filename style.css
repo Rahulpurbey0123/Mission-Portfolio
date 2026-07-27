@@ -205,6 +205,17 @@ img {
   letter-spacing: -1px;
   margin-bottom: 1.5rem;
   animation: pulseGlow 2s infinite ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand-logo-img {
+  max-width: 170px;
+  max-height: 100px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.5));
 }
 
 .loader-spinner {
@@ -293,6 +304,15 @@ img {
   font-weight: 800;
   font-size: 0.95rem;
   box-shadow: var(--shadow-glow);
+  padding: 5px;
+  overflow: hidden;
+}
+
+.nav-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
 }
 
 .nav-menu {
@@ -370,7 +390,7 @@ img {
   padding-top: calc(var(--navbar-height) + 2rem);
   padding-bottom: 4rem;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.08) 0%, rgba(15, 23, 42, 1) 70%);
+  background: radial-gradient(circle at 50% 40%, #071329 0%, #030712 80%);
 }
 
 #particles-canvas {
@@ -1560,5 +1580,171 @@ textarea.form-input {
   margin: 0 auto;
   box-sizing: border-box;
 }
+
+/* --------------------------------------------------------------------------
+   Special Section Additions: Mission, Philosophy, Roadmap & Why Work With Me
+   -------------------------------------------------------------------------- */
+.highlight-mission-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+  transition: var(--transition-normal);
+}
+
+.highlight-mission-card:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.mission-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: var(--transition-fast);
+}
+
+.mission-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-secondary);
+}
+
+.mission-box h4 {
+  font-size: 1.1rem;
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.mission-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.why-work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.why-work-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition-fast);
+}
+
+.why-work-card:hover {
+  transform: translateY(-4px);
+  background: var(--glass-bg-hover);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.why-work-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.why-work-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.roadmap-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  position: relative;
+  transition: var(--transition-normal);
+}
+
+.roadmap-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-secondary);
+  box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+}
+
+.roadmap-step-badge {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-secondary);
+  background: rgba(6, 182, 212, 0.12);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.roadmap-card h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.roadmap-card p {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.learning-chip {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition-fast);
+}
+
+.learning-chip:hover {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: var(--accent-secondary);
+  transform: translateY(-2px);
+}
+
 
 
